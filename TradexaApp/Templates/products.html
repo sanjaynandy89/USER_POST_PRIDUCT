@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static%}
+{% static  'images' as baseURL%} 
+{% block content%}
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+.name
+{
+    font-size: 22px;
+    color:cyan;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+.weight {
+  color: blue;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="row">
+{% for prod in prod_list %}
+<div class="col-lg-3 col-sm-6">
+<div class="card">
+<img src="{% static "images/registration-form-1.jpg" %}"alt="Denim Jeans" style="width:100%">
+  <h1 class="name">{{prod.name}}</h1>
+  <p class="weight">Weight: {{prod.weight}} Kg</p>
+  <p class="price">Price: {{prod.price}} INR</p>
+</div>
+</div>
+{% endfor%}
+
+</div>
+</div>
+
+</body>
+</html>
+{%endblock%}

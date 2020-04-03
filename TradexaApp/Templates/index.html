@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static%}
+{% static  'images' as baseURL%} 
+{% block content%}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+{% if user.is_authenticated %}
+<div class="wrapper" style="background-image: url({% static 'images/bg-registration-form-1.jpg' %});">
+
+
+<div class="container">
+  <li class="w3-bar-item w3-text">Hello,{{user.first_name}}</li>
+  <p>The form below contains a textarea for comments:</p>
+  <form action="Post" method="POST">
+  {%csrf_token%}
+    <div class="form-wrapper">
+      <Label for="comment">Comment:</Label>
+      <br/>
+      <textarea name="comment" class="form-control" rows="10" id="comment"></textarea>
+      <br/>
+      <button>Post
+	   <i class="zmdi zmdi-arrow-right"></i>
+	   </button>
+    </div>
+  
+  </form>
+</div>
+</div>
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Welcome to my awesome Blog </h3>
+                    <p class="text-light">We Love Django As much as you do..! &nbsp
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-8 md-3 mt-3 left">
+            {% for post in posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="card-text text-muted h6">{{ post.user.first_name }} {{post.user.last_name}}| {{ post.created_date}} </p>
+                    <p class="card-text">{{post.text|slice:":200" }}</p>
+                    
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{%endif%}	
+{%endblock%}
